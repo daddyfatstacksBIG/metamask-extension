@@ -1,29 +1,29 @@
-import assert from 'assert'
-import { mapStateToProps, mapDispatchToProps } from '../advanced-tab.container'
+import assert from "assert";
+import { mapStateToProps, mapDispatchToProps } from "../advanced-tab.container";
 
 const defaultState = {
   appState: {
-    warning: null,
+    warning: null
   },
   metamask: {
     featureFlags: {
       sendHexData: false,
       advancedInlineGas: false,
-      threeBox: false,
+      threeBox: false
     },
     preferences: {
       autoLogoutTimeLimit: 0,
       showFiatInTestnets: false,
-      useNativeCurrencyAsPrimaryCurrency: true,
+      useNativeCurrencyAsPrimaryCurrency: true
     },
     threeBoxSyncingAllowed: false,
-    threeBoxDisabled: false,
-  },
-}
+    threeBoxDisabled: false
+  }
+};
 
-describe('AdvancedTab Container', () => {
-  it('should map state to props correctly', () => {
-    const props = mapStateToProps(defaultState)
+describe("AdvancedTab Container", () => {
+  it("should map state to props correctly", () => {
+    const props = mapStateToProps(defaultState);
     const expected = {
       warning: null,
       sendHexData: false,
@@ -32,21 +32,23 @@ describe('AdvancedTab Container', () => {
       autoLogoutTimeLimit: 0,
       threeBoxSyncingAllowed: false,
       threeBoxDisabled: false,
-      threeBoxFeatureFlag: false,
-    }
+      threeBoxFeatureFlag: false
+    };
 
-    assert.deepEqual(props, expected)
-  })
+    assert.deepEqual(props, expected);
+  });
 
-  it('should map dispatch to props correctly', () => {
-    const props = mapDispatchToProps(() => 'mockDispatch')
+  it("should map dispatch to props correctly", () => {
+    const props = mapDispatchToProps(() => "mockDispatch");
 
-    assert.ok(typeof props.setHexDataFeatureFlag === 'function')
-    assert.ok(typeof props.setRpcTarget === 'function')
-    assert.ok(typeof props.displayWarning === 'function')
-    assert.ok(typeof props.showResetAccountConfirmationModal === 'function')
-    assert.ok(typeof props.setAdvancedInlineGasFeatureFlag === 'function')
-    assert.ok(typeof props.setShowFiatConversionOnTestnetsPreference === 'function')
-    assert.ok(typeof props.setAutoLogoutTimeLimit === 'function')
-  })
-})
+    assert.ok(typeof props.setHexDataFeatureFlag === "function");
+    assert.ok(typeof props.setRpcTarget === "function");
+    assert.ok(typeof props.displayWarning === "function");
+    assert.ok(typeof props.showResetAccountConfirmationModal === "function");
+    assert.ok(typeof props.setAdvancedInlineGasFeatureFlag === "function");
+    assert.ok(
+      typeof props.setShowFiatConversionOnTestnetsPreference === "function"
+    );
+    assert.ok(typeof props.setAutoLogoutTimeLimit === "function");
+  });
+});

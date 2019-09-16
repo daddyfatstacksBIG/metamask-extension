@@ -1,7 +1,7 @@
-import AdvancedTab from './advanced-tab.component'
-import { compose } from 'recompose'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import AdvancedTab from "./advanced-tab.component";
+import { compose } from "recompose";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
   updateAndSetCustomRpc,
   displayWarning,
@@ -9,22 +9,23 @@ import {
   showModal,
   setShowFiatConversionOnTestnetsPreference,
   setAutoLogoutTimeLimit,
-  setThreeBoxSyncingPermission,
-} from '../../../store/actions'
-import {preferencesSelector} from '../../../selectors/selectors'
+  setThreeBoxSyncingPermission
+} from "../../../store/actions";
+import { preferencesSelector } from "../../../selectors/selectors";
 
 export const mapStateToProps = state => {
-  const { appState: { warning }, metamask } = state
   const {
-    featureFlags: {
-      sendHexData,
-      advancedInlineGas,
-      threeBox,
-    } = {},
+    appState: { warning },
+    metamask
+  } = state;
+  const {
+    featureFlags: { sendHexData, advancedInlineGas, threeBox } = {},
     threeBoxSyncingAllowed,
-    threeBoxDisabled,
-  } = metamask
-  const { showFiatInTestnets, autoLogoutTimeLimit } = preferencesSelector(state)
+    threeBoxDisabled
+  } = metamask;
+  const { showFiatInTestnets, autoLogoutTimeLimit } = preferencesSelector(
+    state
+  );
 
   return {
     warning,
@@ -34,28 +35,36 @@ export const mapStateToProps = state => {
     autoLogoutTimeLimit,
     threeBoxSyncingAllowed,
     threeBoxDisabled,
-    threeBoxFeatureFlag: threeBox,
-  }
-}
+    threeBoxFeatureFlag: threeBox
+  };
+};
 
 export const mapDispatchToProps = dispatch => {
   return {
-    setHexDataFeatureFlag: shouldShow => dispatch(setFeatureFlag('sendHexData', shouldShow)),
-    setRpcTarget: (newRpc, chainId, ticker, nickname) => dispatch(updateAndSetCustomRpc(newRpc, chainId, ticker, nickname)),
+    setHexDataFeatureFlag: shouldShow =>
+      dispatch(setFeatureFlag("sendHexData", shouldShow)),
+    setRpcTarget: (newRpc, chainId, ticker, nickname) =>
+      dispatch(updateAndSetCustomRpc(newRpc, chainId, ticker, nickname)),
     displayWarning: warning => dispatch(displayWarning(warning)),
-    showResetAccountConfirmationModal: () => dispatch(showModal({ name: 'CONFIRM_RESET_ACCOUNT' })),
-    setAdvancedInlineGasFeatureFlag: shouldShow => dispatch(setFeatureFlag('advancedInlineGas', shouldShow)),
+    showResetAccountConfirmationModal: () =>
+      dispatch(showModal({ name: "CONFIRM_RESET_ACCOUNT" })),
+    setAdvancedInlineGasFeatureFlag: shouldShow =>
+      dispatch(setFeatureFlag("advancedInlineGas", shouldShow)),
     setShowFiatConversionOnTestnetsPreference: value => {
-      return dispatch(setShowFiatConversionOnTestnetsPreference(value))
+      return dispatch(setShowFiatConversionOnTestnetsPreference(value));
     },
     setAutoLogoutTimeLimit: value => {
-      return dispatch(setAutoLogoutTimeLimit(value))
+      return dispatch(setAutoLogoutTimeLimit(value));
     },
-    setThreeBoxSyncingPermission: newThreeBoxSyncingState => dispatch(setThreeBoxSyncingPermission(newThreeBoxSyncingState)),
-  }
-}
+    setThreeBoxSyncingPermission: newThreeBoxSyncingState =>
+      dispatch(setThreeBoxSyncingPermission(newThreeBoxSyncingState))
+  };
+};
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
-)(AdvancedTab)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(AdvancedTab);
