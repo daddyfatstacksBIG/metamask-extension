@@ -1,20 +1,21 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { exportAsFile } from '../../../helpers/utils/util'
-import ToggleButton from '../../../components/ui/toggle-button'
-import TextField from '../../../components/ui/text-field'
+import PropTypes from 'prop-types'
+import React, {PureComponent} from 'react'
+
 import Button from '../../../components/ui/button'
-import { MOBILE_SYNC_ROUTE } from '../../../helpers/constants/routes'
+import TextField from '../../../components/ui/text-field'
+import ToggleButton from '../../../components/ui/toggle-button'
+import {MOBILE_SYNC_ROUTE} from '../../../helpers/constants/routes'
+import {exportAsFile} from '../../../helpers/utils/util'
 
 export default class AdvancedTab extends PureComponent {
   static contextTypes = {
-    t: PropTypes.func,
+    t : PropTypes.func,
     metricsEvent: PropTypes.func,
   }
 
   static propTypes = {
-    setUseNonceField: PropTypes.func,
+    setUseNonceField : PropTypes.func,
     useNonceField: PropTypes.bool,
     setHexDataFeatureFlag: PropTypes.func,
     setRpcTarget: PropTypes.func,
@@ -34,11 +35,11 @@ export default class AdvancedTab extends PureComponent {
     threeBoxDisabled: PropTypes.bool.isRequired,
   }
 
-  state = { autoLogoutTimeLimit: this.props.autoLogoutTimeLimit }
+  state = {autoLogoutTimeLimit : this.props.autoLogoutTimeLimit}
 
-  renderMobileSync () {
-    const { t } = this.context
-    const { history } = this.props
+  renderMobileSync() {
+    const {t} = this.context
+    const {history} = this.props
     //
     return (
       <div className="settings-page__content-row">
@@ -48,11 +49,11 @@ export default class AdvancedTab extends PureComponent {
         <div className="settings-page__content-item">
           <div className="settings-page__content-item-col">
             <Button
-              type="secondary"
-              large
+    type = "secondary"
+    large
               onClick={event => {
-                event.preventDefault()
-                history.push(MOBILE_SYNC_ROUTE)
+      event.preventDefault()
+      history.push(MOBILE_SYNC_ROUTE)
               }}
             >
               { t('syncWithMobile') }
@@ -63,9 +64,9 @@ export default class AdvancedTab extends PureComponent {
     )
   }
 
-  renderStateLogs () {
-    const { t } = this.context
-    const { displayWarning } = this.props
+  renderStateLogs() {
+    const {t} = this.context
+    const {displayWarning} = this.props
 
     return (
       <div className="settings-page__content-row">
@@ -151,7 +152,8 @@ export default class AdvancedTab extends PureComponent {
               value={sendHexData}
               onToggle={value => setHexDataFeatureFlag(!value)}
               offLabel={t('off')}
-              onLabel={t('on')}
+              onLabel={
+      t('on')}
             />
           </div>
         </div>
@@ -159,9 +161,9 @@ export default class AdvancedTab extends PureComponent {
     )
   }
 
-  renderAdvancedGasInputInline () {
-    const { t } = this.context
-    const { advancedInlineGas, setAdvancedInlineGasFeatureFlag } = this.props
+  renderAdvancedGasInputInline() {
+    const {t} = this.context
+    const {advancedInlineGas, setAdvancedInlineGasFeatureFlag} = this.props
 
     return (
       <div className="settings-page__content-row">
@@ -206,7 +208,8 @@ export default class AdvancedTab extends PureComponent {
               value={showFiatInTestnets}
               onToggle={value => setShowFiatConversionOnTestnetsPreference(!value)}
               offLabel={t('off')}
-              onLabel={t('on')}
+              onLabel={
+      t('on')}
             />
           </div>
         </div>
@@ -214,9 +217,9 @@ export default class AdvancedTab extends PureComponent {
     )
   }
 
-  renderUseNonceOptIn () {
-    const { t } = this.context
-    const { useNonceField, setUseNonceField } = this.props
+  renderUseNonceOptIn() {
+    const {t} = this.context
+    const {useNonceField, setUseNonceField} = this.props
 
     return (
       <div className="settings-page__content-row">
@@ -258,16 +261,18 @@ export default class AdvancedTab extends PureComponent {
         <div className="settings-page__content-item">
           <div className="settings-page__content-item-col">
             <TextField
-              type="number"
-              id="autoTimeout"
-              placeholder="5"
-              value={this.state.autoLogoutTimeLimit}
-              defaultValue={autoLogoutTimeLimit}
-              onChange={e => this.setState({ autoLogoutTimeLimit: Math.max(Number(e.target.value), 0) })}
-              fullWidth
-              margin="dense"
-              min={0}
-            />
+    type = "number"
+    id = "autoTimeout"
+    placeholder = "5"
+    value = {this.state.autoLogoutTimeLimit} defaultValue = {
+        autoLogoutTimeLimit} onChange = {e => this.setState({
+      autoLogoutTimeLimit : Math.max(Number(e.target.value), 0)
+    })} fullWidth
+    margin = "dense"
+    min =
+    {
+      0
+    } />
             <button
               className="button btn-primary settings-tab__rpc-save-button"
               onClick={() => {
@@ -275,10 +280,10 @@ export default class AdvancedTab extends PureComponent {
               }}
             >
               { t('save') }
-            </button>
-          </div>
+            </button >
         </div>
-      </div>
+        </div>
+        </div>
     )
   }
 
@@ -301,25 +306,23 @@ export default class AdvancedTab extends PureComponent {
       <div className="settings-page__content-row">
         <div className="settings-page__content-item">
           <span>{ t('syncWithThreeBox') }</span>
-          <div className="settings-page__content-description">
-            { description }
-          </div>
-        </div>
-        <div
-          className={classnames('settings-page__content-item', {
-            'settings-page__content-item--disabled': threeBoxDisabled,
-          })}
-        >
-          <div className="settings-page__content-item-col">
-            <ToggleButton
+        <div className = "settings-page__content-description">{
+            description}</div>
+        </div>< div
+    className = {classnames('settings-page__content-item', {
+                  'settings-page__content-item--disabled' : threeBoxDisabled,
+                })} > <div className = "settings-page__content-item-col"><
+                ToggleButton
               value={allowed}
-              onToggle={value => {
-                if (!threeBoxDisabled) {
-                  setThreeBoxSyncingPermission(!value)
-                }
-              }}
+              onToggle={
+      value => {
+        if (!threeBoxDisabled) {
+          setThreeBoxSyncingPermission(!value)
+        }
+      }}
               offLabel={t('off')}
-              onLabel={t('on')}
+              onLabel={
+      t('on')}
             />
           </div>
         </div>
@@ -327,8 +330,8 @@ export default class AdvancedTab extends PureComponent {
     )
   }
 
-  renderContent () {
-    const { warning } = this.props
+  renderContent() {
+    const {warning} = this.props
 
     return (
       <div className="settings-page__body">
@@ -347,6 +350,6 @@ export default class AdvancedTab extends PureComponent {
   }
 
   render () {
-    return this.renderContent()
+      return this.renderContent()
   }
-}
+  }

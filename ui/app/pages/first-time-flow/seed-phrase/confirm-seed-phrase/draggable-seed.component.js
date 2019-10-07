@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { DragSource, DropTarget } from 'react-dnd'
+import PropTypes from 'prop-types'
+import React, {Component} from 'react'
+import {DragSource, DropTarget} from 'react-dnd'
 
 class DraggableSeed extends Component {
 
   static propTypes = {
     // React DnD Props
-    connectDragSource: PropTypes.func.isRequired,
+    connectDragSource : PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
     isDragging: PropTypes.bool,
     isOver: PropTypes.bool,
@@ -24,18 +24,18 @@ class DraggableSeed extends Component {
   }
 
   static defaultProps = {
-    className: '',
-    onClick () {},
+    className : '',
+    onClick() {},
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { isOver, setHoveringIndex } = this.props
+  componentWillReceiveProps(nextProps) {
+    const {isOver, setHoveringIndex} = this.props
     if (isOver && !nextProps.isOver) {
       setHoveringIndex(-1)
     }
   }
 
-  render () {
+  render() {
     const {
       connectDragSource,
       connectDropTarget,
@@ -51,18 +51,16 @@ class DraggableSeed extends Component {
 
     return connectDropTarget(connectDragSource(
       <div
-        key={index}
-        className={classnames('btn-secondary notranslate confirm-seed-phrase__seed-word', className, {
-          'confirm-seed-phrase__seed-word--selected btn-primary': selected,
+    key = {index} className = {classnames(
+        'btn-secondary notranslate confirm-seed-phrase__seed-word', className, {
+          'confirm-seed-phrase__seed-word--selected btn-primary' : selected,
           'confirm-seed-phrase__seed-word--dragging': isDragging,
           'confirm-seed-phrase__seed-word--empty': !word,
           'confirm-seed-phrase__seed-word--active-drop': !isOver && canDrop,
           'confirm-seed-phrase__seed-word--drop-hover': isOver && canDrop,
-        })}
-        onClick={onClick}
-      >
-        { word }
-      </div>
+        })} onClick =
+        {onClick} > {word} <
+        /div>
     ))
   }
 }
