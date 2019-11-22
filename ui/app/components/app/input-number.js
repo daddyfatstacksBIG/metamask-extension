@@ -11,48 +11,51 @@ const {
 module.exports = InputNumber
 
 inherits(InputNumber, Component)
-function InputNumber () {
-  Component.call(this)
+function InputNumber() {
+  Component
+      .call(this)
 
-  this.setValue = this.setValue.bind(this)
+          this.setValue = this.setValue.bind(this)
 }
 
-function isValidInput (text) {
+function isValidInput(text) {
   const re = /^([1-9]\d*|0)(\.|\.\d*)?$/
   return re.test(text)
 }
 
-function removeLeadingZeroes (str) {
-  return str.replace(/^0*(?=\d)/, '')
-}
+function removeLeadingZeroes(str) { return str.replace(/^0*(?=\d)/, '') }
 
-InputNumber.prototype.setValue = function (newValue) {
+InputNumber.prototype.setValue =
+    function(newValue) {
   newValue = removeLeadingZeroes(newValue)
   if (newValue && !isValidInput(newValue)) {
     return
   }
-  const { fixed, min = -1, max = Infinity, onChange } = this.props
+  const {fixed, min = -1, max = Infinity, onChange} = this.props
 
   newValue = fixed ? newValue.toFixed(4) : newValue
   const newValueGreaterThanMin = conversionGTE(
-    { value: newValue || '0', fromNumericBase: 'dec' },
-    { value: min, fromNumericBase: 'hex' },
+      {value : newValue || '0', fromNumericBase : 'dec'},
+      {value : min, fromNumericBase : 'hex'},
   )
 
   const newValueLessThanMax = conversionLTE(
-    { value: newValue || '0', fromNumericBase: 'dec' },
-    { value: max, fromNumericBase: 'hex' },
+      {value : newValue || '0', fromNumericBase : 'dec'},
+      {value : max, fromNumericBase : 'hex'},
   )
   if (newValueGreaterThanMin && newValueLessThanMax) {
     onChange(newValue)
-  } else if (!newValueGreaterThanMin) {
+  }
+  else if (!newValueGreaterThanMin) {
     onChange(min)
-  } else if (!newValueLessThanMax) {
+  }
+  else if (!newValueLessThanMax) {
     onChange(max)
   }
 }
 
-InputNumber.prototype.render = function InputNumber () {
+    InputNumber.prototype.render =
+        function InputNumber() {
   const { unitLabel, step = 1, placeholder, value } = this.props
 
   return (
