@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useGasFeeInputs } from '../hooks/gasFeeInput/useGasFeeInputs';
+import { useGasFeeInputs } from '../pages/confirmations/hooks/useGasFeeInputs';
 
 export const GasFeeContext = createContext({});
 
@@ -31,7 +31,7 @@ export function useGasFeeContext() {
 GasFeeContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
   defaultEstimateToUse: PropTypes.string,
-  transaction: PropTypes.object.isRequired,
+  transaction: PropTypes.object,
   minimumGasLimit: PropTypes.string,
   editGasMode: PropTypes.string,
 };
